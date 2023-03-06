@@ -19,6 +19,7 @@ const questionsID = [
 const AppProvider = ({ children }) => {
   // State for question indexing
   const [index, setIndex] = useState(0);
+  const [prevHandle, setPrevHandle] = useState("");
 
   // Defining initial state
   const initialstate = {
@@ -28,19 +29,23 @@ const AppProvider = ({ children }) => {
 
   //   Defining reducer function
   const reducer = (state, action) => {
-    if (action.type === "Next" && index <= 2) {
+    if (action.type === "Next" && index <= questionsID.length - 1) {
+      setPrevHandle("");
       return {
         ...state,
         index: action.payload.index + 1,
         ques: questionsID[index],
       };
     } else if (action.type === "Prev" && index >= 0) {
+      if (action.payload.index === 0) {
+        setPrevHandle("There is no previous question!");
+      }
       return {
         ...state,
         index: action.payload.index - 1,
         ques: questionsID[index],
       };
-    } else if (index > 2) {
+    } else if (index > questionsID.length - 1) {
       setIndex(0);
       return {
         ...state,
@@ -112,7 +117,11 @@ const AppProvider = ({ children }) => {
             {" Next  >>"}
           </button>
         </div>
+      <div className="Prev-handle">
+        <h2>{prevHandle}</h2>
       </div>
+      </div>
+
       <Footer />
     </>
   );
