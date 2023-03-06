@@ -192,11 +192,11 @@ body {
         font-size: 0.9rem;
     }
     .Prev-handle h2{
-        font-size: 0.7rem;    
+        font-size: 0.6rem; 
+        left: 32%;   
     }
     .footer{
         position: absolute;
-        /* height: 207px; */
         bottom: -2px;
     }
     .footer h2{
